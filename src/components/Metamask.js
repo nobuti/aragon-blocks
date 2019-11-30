@@ -19,19 +19,24 @@ export const Metamask = ({ children }) => {
   const web3 = useRef();
 
   useEffect(() => {
+    const setupProvider = () => {
+      const provider = new Web3.providers.HttpProvider(
+        "https://ropsten.infura.io/v3/fbbffc8457ac4c269513bd352c6c5113"
+      );
+      web3.current = new Web3(provider);
+      setState({ web3: web3.current, error: null, loading: false });
+    };
+
     async function trySetWeb3() {
       if (window.ethereum) {
-        web3.current = new Web3(window.ethereum);
         try {
           await window.ethereum.enable();
-          setState({ web3: web3.current, error: null, loading: false });
+          setupProvider();
         } catch (e) {
-          console.log(e);
           setState({ web3: null, error: ERRORS.denied, loading: false });
         }
       } else if (window.web3) {
-        web3.current = new Web3(window.web3.currentProvider);
-        setState({ web3: web3.current, error: null, loading: false });
+        setupProvider();
       } else {
         setState({ web3: null, error: ERRORS.forbidden, loading: false });
       }

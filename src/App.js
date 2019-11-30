@@ -1,16 +1,18 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "@nobuti/styled-reset";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 import { Metamask } from "./components/Metamask";
-import Custodian from "./components/Custodian";
-import Loading from "./components/Loading";
+import Route from "./components/RestrictedRoute";
+import Layout from "./components/Layout";
+import { Home, Block, Transaction } from "./pages";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   
   body {
-    background-color: #e3e7ee;
+    background-color: rgb(249, 250, 252); /*#e3e7ee;*/
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
   }
@@ -21,19 +23,15 @@ function App() {
     <>
       <GlobalStyle />
       <Metamask>
-        <Custodian>
-          {({ error, loading }) => {
-            if (loading) {
-              return <Loading color={`#4070f4`} />;
-            }
-
-            if (error) {
-              return <div>Error: {error}</div>;
-            }
-
-            return <div>Aragon rocks</div>;
-          }}
-        </Custodian>
+        <Layout>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/block/:hash" component={Block} />
+              <Route exact path="/transaction/:hash" component={Transaction} />
+            </Switch>
+          </BrowserRouter>
+        </Layout>
       </Metamask>
     </>
   );

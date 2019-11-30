@@ -1,5 +1,7 @@
+import React from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
+import "styled-components/macro";
 
 const bounce = keyframes`
   0%, 100% { 
@@ -10,7 +12,7 @@ const bounce = keyframes`
   }
 `;
 
-const Loading = styled.div`
+const LoadingIndicator = styled.div`
   width: ${props => props.size}px;
   height: ${props => props.size}px;
   position: relative;
@@ -35,14 +37,26 @@ const Loading = styled.div`
   }
 `;
 
-Loading.propTypes = {
+LoadingIndicator.propTypes = {
   color: PropTypes.string,
   size: PropTypes.number
 };
 
-Loading.defaultProps = {
+LoadingIndicator.defaultProps = {
   color: "#fff",
   size: 48
 };
+
+const Loading = () => (
+  <div
+    css={`
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+    `}
+  >
+    <LoadingIndicator />
+  </div>
+);
 
 export default Loading;
