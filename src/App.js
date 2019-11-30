@@ -1,32 +1,41 @@
 import React from "react";
+import { createGlobalStyle } from "styled-components";
+import reset from "@nobuti/styled-reset";
 
 import { Metamask } from "./components/Metamask";
 import Custodian from "./components/Custodian";
-import logo from "./logo.svg";
-import "./App.css";
+import Loading from "./components/Loading";
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  
+  body {
+    background-color: #e3e7ee;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+  }
+`;
 
 function App() {
   return (
-    <Metamask>
-      <Custodian>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-      </Custodian>
-    </Metamask>
+    <>
+      <GlobalStyle />
+      <Metamask>
+        <Custodian>
+          {({ error, loading }) => {
+            if (loading) {
+              return <Loading color={`#4070f4`} />;
+            }
+
+            if (error) {
+              return <div>Error: {error}</div>;
+            }
+
+            return <div>Aragon rocks</div>;
+          }}
+        </Custodian>
+      </Metamask>
+    </>
   );
 }
 
