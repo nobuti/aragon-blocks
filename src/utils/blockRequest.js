@@ -10,12 +10,6 @@ const request = ({ web3, blocks }) => {
     });
   });
 
-  // const detail = await web3.eth.getTransaction(
-  //   "0x2dbee8aa069df17324320000fb94b8b583da11c589b6926e529ab7d78462c9e6"
-  // );
-
-  // console.log(detail);
-
   batch.execute();
   return Promise.all(promises);
 };
