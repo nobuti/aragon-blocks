@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState, useMemo } from "react";
 import { useWindowSize } from "@nobuti/react-plug";
 import { Link } from "react-router-dom";
 import posed, { PoseGroup } from "react-pose";
-import "styled-components/macro";
 
 import { blocks } from "../utils/request";
 import { range } from "../utils";

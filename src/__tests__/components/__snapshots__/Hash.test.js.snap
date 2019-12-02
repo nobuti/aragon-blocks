@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hash component should not shortcut the hash if it is not long enough 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH ffRHco"
+    title="0x123456"
+  >
+    0x123456
+  </div>
+</div>
+`;
+
+exports[`Hash component should render invalid if hash is not provided 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH ffRHco"
+    title="Invalid transaction"
+  >
+    Invalid transaction
+  </div>
+</div>
+`;
+
+exports[`Hash component should render properly if hash is provided 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH ffRHco"
+    title="0x686ACf148C1dAaA226b661fff8b7CBbD7c7AEE20"
+  >
+    0x686A...EE20
+  </div>
+</div>
+`;
