@@ -20,7 +20,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "predeploy": "npm run build",
+    "deploy": "surge ./build aragon.surge.sh"
   },
   "browserslist": {
     "production": [
@@ -41,6 +43,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
-    "react-test-renderer": "^16.12.0"
+    "react-test-renderer": "^16.12.0",
+    "surge": "^0.21.3"
   }
 }
