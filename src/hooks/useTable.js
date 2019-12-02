@@ -9,7 +9,6 @@ import { pick, get, isArray, flatArray, set } from "../utils";
     sortable: string
     show: boolean or func
     cell: string or func
-    filter: func
 */
 
 const defaultSort = {
@@ -31,14 +30,7 @@ const getId = column => {
 const useTable = ({ columns, data, sortedBy = defaultSort }) => {
   const table = useRef({});
   const [sortState, sortBy] = useState({ ...defaultSort, ...sortedBy });
-  const [orderColumns, setOrderColumns] = useState(
-    columns.map(column => getId(column))
-  );
-
-  const updateOrderColumns = order => {
-    const result = typeof order === "function" ? order(orderColumns) : order;
-    setOrderColumns(result);
-  };
+  const orderColumns = columns.map(column => getId(column));
 
   const sort = (a, b) => {
     let result;
@@ -164,7 +156,7 @@ const useTable = ({ columns, data, sortedBy = defaultSort }) => {
     }
   });
 
-  return { table: table.current, sortBy, updateOrderColumns };
+  return { table: table.current, sortBy };
 };
 
 export default useTable;
