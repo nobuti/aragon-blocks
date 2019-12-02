@@ -1,22 +1,32 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "@nobuti/styled-reset";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import posed, { PoseGroup } from "react-pose";
 
 import { Metamask } from "./components/Metamask";
-import Route from "./components/RestrictedRoute";
+import RestrictedRoute from "./components/RestrictedRoute";
 import Layout from "./components/Layout";
-import { Home, Block, Transaction } from "./pages";
+import { Home, Block } from "./pages";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   
   body {
-    background-color: rgb(249, 250, 252); /*#e3e7ee;*/
-    font-family: 'Source Sans Pro', sans-serif;
+    background-color: rgb(249, 250, 252);
+    font-family: system-ui, sans-serif;
     font-weight: 400;
   }
+
+  a {
+    color: #f0a;
+  }
 `;
+
+const RouteContainer = posed.div({
+  enter: { opacity: 1, delay: 500, beforeChildren: true },
+  exit: { opacity: 0 }
+});
 
 function App() {
   return (
@@ -25,11 +35,22 @@ function App() {
       <Metamask>
         <Layout>
           <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/block/:hash" component={Block} />
-              <Route exact path="/transaction/:hash" component={Transaction} />
-            </Switch>
+            <Route
+              render={({ location }) => (
+                <PoseGroup>
+                  <RouteContainer key={location.pathname}>
+                    <Switch location={location}>
+                      <RestrictedRoute exact path="/" component={Home} />
+                      <RestrictedRoute
+                        exact
+                        path="/block/:hash"
+                        component={Block}
+                      />
+                    </Switch>
+                  </RouteContainer>
+                </PoseGroup>
+              )}
+            />
           </BrowserRouter>
         </Layout>
       </Metamask>
