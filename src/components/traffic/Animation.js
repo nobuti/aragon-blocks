@@ -1,7 +1,6 @@
 import React from "react";
 import times from "lodash.times";
 import styled, { keyframes, css } from "styled-components";
-import "styled-components/macro";
 
 const randomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -35,6 +34,12 @@ const Item = styled.span`
     width: ${props.width}px;
     margin: ${props.margin};
     background: ${props.color};
+  `};
+`;
+
+const Pattern = styled.span`
+  ${props => css`
+    margin: ${props.margin};
   `};
 `;
 
@@ -88,14 +93,12 @@ const Traffic = ({ rows, width }) => {
 
   const genPattern = index => {
     return (
-      <span
+      <Pattern
         key={`p${index}`}
-        css={`
-          margin: 0 ${randomNumber(2, 16)}px 0 ${randomNumber(2, 16)}px;
-        `}
+        margin={`0 ${randomNumber(2, 16)}px 0 ${randomNumber(2, 16)}px`}
       >
         {genSequence(index)}
-      </span>
+      </Pattern>
     );
   };
 

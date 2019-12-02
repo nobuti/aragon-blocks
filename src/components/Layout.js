@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import "styled-components/macro";
 
 import { Header, Hero, Container, Hologram, Footer, Dataview } from "./layout";
 import Traffic from "./traffic";
