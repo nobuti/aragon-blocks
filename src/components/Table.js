@@ -6,17 +6,17 @@ import useTable from "../hooks/useTable";
 import { isArray } from "../utils";
 
 const Table = styled.table`
-  width: 100%;
   border-collapse: separate;
+  margin: 0 auto;
 `;
 
 const Header = styled.th`
-  padding: 0px 0px 0px 21px;
+  padding: 0px 0px 0px 10px;
   text-align: left;
   white-space: nowrap;
   color: rgb(0, 0, 0, 0.6);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   line-height: 32px;
   cursor: pointer;
@@ -25,7 +25,8 @@ const Header = styled.th`
 const Row = styled.tr``;
 
 const Cell = styled.td`
-  padding: 20px;
+  font-size: 12px;
+  padding: 20px 10px;
   background: rgb(255, 255, 255);
   text-align: left;
   border-bottom: 1px solid #dde4e9;
@@ -56,6 +57,10 @@ const Cell = styled.td`
 
   ${Row}:last-child &:last-child {
     border-bottom-right-radius: 4px;
+  }
+
+  div {
+    white-space: nowrap;
   }
 `;
 

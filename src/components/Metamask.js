@@ -29,6 +29,8 @@ export const Metamask = ({ children }) => {
 
     async function trySetWeb3() {
       if (window.ethereum) {
+        window.ethereum.autoRefreshOnNetworkChange = false;
+
         try {
           await window.ethereum.enable();
           setupProvider();

@@ -43,7 +43,7 @@ LoadingIndicator.propTypes = {
 };
 
 LoadingIndicator.defaultProps = {
-  color: "#fff",
+  color: "#4a00e0",
   size: 48
 };
 
