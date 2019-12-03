@@ -33,10 +33,10 @@ function App() {
     <>
       <GlobalStyle />
       <Metamask>
-        <Layout>
-          <BrowserRouter>
-            <Route
-              render={({ location }) => (
+        <BrowserRouter>
+          <Route
+            render={({ location }) => (
+              <Layout>
                 <PoseGroup>
                   <RouteContainer key={location.pathname}>
                     <Switch location={location}>
@@ -49,10 +49,10 @@ function App() {
                     </Switch>
                   </RouteContainer>
                 </PoseGroup>
-              )}
-            />
-          </BrowserRouter>
-        </Layout>
+              </Layout>
+            )}
+          />
+        </BrowserRouter>
       </Metamask>
     </>
   );

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { useWindowSize } from "@nobuti/react-plug";
-import { Link } from "react-router-dom";
 import posed, { PoseGroup } from "react-pose";
 
 import { blocks, transactions } from "../utils/request";
@@ -51,33 +50,9 @@ const Block = ({ match }) => {
   const columns = useMemo(() => {
     return [
       {
-        header: "Tx",
-        accessor: ["blockNumber", "hash"],
-        id: "tx",
-        cell: data => (
-          <>
-            <div>
-              <Hash hash={data.hash} />
-            </div>
-            <div>
-              Block <Link to="/">{data.blockNumber}</Link>
-            </div>
-          </>
-        ),
-        show: () => width <= 740
-      },
-      {
-        header: "Block",
-        id: "block",
-        accessor: "blockNumber",
-        cell: data => <Link to="/">{data}</Link>,
-        show: () => width > 740
-      },
-      {
         header: "Hash",
         accessor: "hash",
-        cell: data => <Hash hash={data} />,
-        show: () => width > 740
+        cell: data => <Hash hash={data} />
       },
       {
         header: "Sender",

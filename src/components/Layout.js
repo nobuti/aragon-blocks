@@ -1,8 +1,19 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import posed, { PoseGroup } from "react-pose";
+import { Route, Switch, Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { Header, Hero, Container, Hologram, Footer, Dataview } from "./layout";
-import Traffic from "./traffic";
+
+const RouteContainer = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
+
+const Block = styled.span`
+  color: #8e2de2;
+`;
 
 const Layout = ({ children }) => {
   const node = useRef();
@@ -50,11 +61,42 @@ const Layout = ({ children }) => {
       </Hero.Main>
       <Container>
         <Dataview.Main>
-          <Traffic />
-
           <Dataview.Claim id="dataview" ref={node}>
-            <h3>Ten blocks. No more no less</h3>
-            <p>Have fun exploring transactions. Since!</p>
+            <Route
+              render={({ location }) => (
+                <PoseGroup>
+                  <RouteContainer key={location.pathname}>
+                    <Switch location={location}>
+                      <Route
+                        exact
+                        path="/"
+                        render={() => (
+                          <>
+                            <h3>Ten blocks. No more no less</h3>
+                            <p>Have fun exploring transactions. Since!</p>
+                          </>
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/block/:hash"
+                        render={({ match }) => (
+                          <>
+                            <h3>
+                              Here you have! The block{" "}
+                              <Block>{match.params.hash}</Block>.
+                            </h3>
+                            <p>
+                              Now <Link to="/">go back</Link> and keep exploring
+                            </p>
+                          </>
+                        )}
+                      />
+                    </Switch>
+                  </RouteContainer>
+                </PoseGroup>
+              )}
+            />
           </Dataview.Claim>
 
           {children}
