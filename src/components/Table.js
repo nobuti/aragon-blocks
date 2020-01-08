@@ -79,7 +79,7 @@ const Component = ({ columns, data }) => {
       const sorted = table.sortedBy;
       let direction = "desc";
       const accessor = isArray(column.accessor)
-        ? column.sortable
+        ? column.columnId
         : column.accessor;
       if (sorted.accessor === accessor) {
         direction = sorted.direction === "desc" ? "asc" : "desc";
